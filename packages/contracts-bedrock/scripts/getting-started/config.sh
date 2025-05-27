@@ -25,7 +25,12 @@ append_with_default() {
         var_value="$default_value"
     fi
 
-    echo "  \"$json_key\": \"$var_value\"," >> tmp_config.json
+#    echo "  \"$json_key\": \"$var_value\"," >> tmp_config.json
+    if [[ "$var_value" == 0x* ]]; then
+        echo "  \"$json_key\": \"$var_value\"," >> tmp_config.json
+    else
+        echo "  \"$json_key\": $var_value," >> tmp_config.json
+    fi
 }
 
 # Check required environment variables
@@ -40,9 +45,13 @@ reqenv "L1_BLOCK_TIME"
 reqenv "L2_BLOCK_TIME"
 
 # Get the latest block timestamp and hash
-block=$(cast block latest --rpc-url "$L1_RPC_URL")
-timestamp=$(echo "$block" | awk '/timestamp/ { print $2 }')
-blockhash=$(echo "$block" | awk '/hash/ { print $2 }')
+#block=$(cast block latest --rpc-url "$L1_RPC_URL")
+#timestamp=$(echo "$block" | awk '/timestamp/ { print $2 }')
+#blockhash=$(echo "$block" | awk '/hash/ { print $2 }')
+# 获取区块哈希（JSON 模式）
+blockhash=$(cast block latest --rpc-url "$L1_RPC_URL" --json | jq -r '.hash')
+timestamp=$(cast block latest --rpc-url "$L1_RPC_URL" --json | jq -r '.timestamp' | cast --to-dec)
+
 
 # Start generating the config file in a temporary file
 

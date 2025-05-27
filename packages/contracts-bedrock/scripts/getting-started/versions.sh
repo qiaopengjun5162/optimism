@@ -14,17 +14,48 @@ version() {
   fi
 }
 
-versionFoundry() {
-  local string="$1"
-  local version_regex='forge ([0-9]+\.[0-9]+\.[0-9]+)'
-  local commit_hash_regex='\(([a-fA-F0-9]+)'
-  local full_regex="${version_regex} ${commit_hash_regex}"
+#versionFoundry() {
+#  local string="$1"
+#  local version_regex='forge ([0-9]+\.[0-9]+\.[0-9]+)'
+#  local commit_hash_regex='\(([a-fA-F0-9]+)'
+#  local full_regex="${version_regex} ${commit_hash_regex}"
+#
+#  if [[ $string =~ $full_regex ]]; then
+#    echo "${BASH_REMATCH[1]} (${BASH_REMATCH[2]})"
+#  else
+#    echo "No version, commit hash, and timestamp found."
+#  fi
+#}
 
-  if [[ $string =~ $full_regex ]]; then
-    echo "${BASH_REMATCH[1]} (${BASH_REMATCH[2]})"
-  else
-    echo "No version, commit hash, and timestamp found."
-  fi
+versionFoundry() {
+    # 尝试获取forge版本信息
+    local forge_output
+    forge_output=$(forge --version 2>&1)
+
+    # 提取版本号
+    local version=""
+    if [[ $forge_output =~ [0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z]+)? ]]; then
+        version=${BASH_REMATCH[0]}
+    fi
+
+    # 提取提交哈希
+    local commit_hash=""
+    if [[ $forge_output =~ [0-9a-f]{8,} ]]; then
+        commit_hash=${BASH_REMATCH[0]}
+    fi
+
+    # 组合输出
+    if [[ -n "$version" && -n "$commit_hash" ]]; then
+#        echo "$version ($commit_hash)"
+         echo "$version (${commit_hash:0:8})"  # 只显示前8位哈希
+
+    elif [[ -n "$version" ]]; then
+        echo "$version"
+    elif [[ -n "$commit_hash" ]]; then
+        echo "$commit_hash"
+    else
+        echo "No version or commit hash found"
+    fi
 }
 
 
