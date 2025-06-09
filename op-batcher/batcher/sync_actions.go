@@ -134,7 +134,7 @@ func computeSyncActions[T channelStatuser](
 		return startAfresh, false
 	}
 
-	if numBlocksToDequeue > 0 && blocks[numBlocksToDequeue-1].Hash() != safeL2.Hash {
+	if numBlocksToDequeue > 0 && blocks[numBlocksToDequeue-1].Hash() != safeL2.Hash { // 重组 回滚
 		m.Warn("safe chain reorg, clearing channel manager state",
 			"syncActions", startAfresh.TerminalString(),
 			"existingBlock", eth.ToBlockID(blocks[numBlocksToDequeue-1]).TerminalString())
