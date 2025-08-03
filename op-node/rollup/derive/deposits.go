@@ -48,4 +48,5 @@ func DeriveDeposits(receipts []*types.Receipt, depositContractAddr common.Addres
 		}
 	}
 	return encodedTxs, result
+	//	返回的是 ​​[]hexutil.Bytes​​，即一系列编码后的 ​​types.Transaction​​（交易）的二进制数据。
 }

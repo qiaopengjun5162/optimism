@@ -3,6 +3,7 @@ package derive
 import (
 	"context"
 	"fmt"
+	"github.com/ethereum/go-ethereum/log"
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -86,7 +87,32 @@ func (ba *FetchingAttributesBuilder) PreparePayloadAttributes(ctx context.Contex
 		}
 
 		l1Info = info
+
 		depositTxs = deposits
+		for _, txBytes := range deposits {
+			// 1. 将二进制数据反序列化为 Transaction
+			var tx types.Transaction
+			if err := tx.UnmarshalBinary(txBytes); err != nil {
+				log.Error("反序列化存款交易失败", "err", err)
+				continue // 或根据业务需求改为 return err
+			}
+
+			// 2. 获取交易发送者（需签名验证）
+			from, err := types.Sender(types.LatestSignerForChainID(tx.ChainId()), &tx)
+			if err != nil {
+				log.Error("获取交易发送者失败", "txHash", tx.Hash(), "err", err)
+				continue
+			}
+
+			// 3. 记录交易详情
+			log.Info("存款交易",
+				"txHash", tx.Hash().Hex(),
+				"from", from.Hex(),
+				"to", tx.To().Hex(), // 注意：To() 可能为 nil（如果是合约创建交易）
+				"value", tx.Value(),
+				"data", hexutil.Encode(tx.Data()),
+			)
+		}
 		seqNumber = 0
 	} else {
 		if l2Parent.L1Origin.Hash != epoch.Hash {
@@ -97,6 +123,7 @@ func (ba *FetchingAttributesBuilder) PreparePayloadAttributes(ctx context.Contex
 			return nil, NewTemporaryError(fmt.Errorf("failed to fetch L1 block info: %w", err))
 		}
 		l1Info = info
+
 		depositTxs = nil
 		seqNumber = l2Parent.SequenceNumber + 1
 	}

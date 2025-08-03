@@ -1,0 +1,43 @@
+{
+  "superchainDeployment": {
+    "proxyAdminAddress": "0xed0557f8489bacc829b4f2d9e42f21a6a92a0b04",
+    "superchainConfigProxyAddress": "0xe00aaa74d3eaeb1d7e51acedcc1c44855b653179",
+    "superchainConfigImplAddress": "0x4da82a327773965b8d4d85fa3db8249b387458e7",
+    "protocolVersionsProxyAddress": "0x71f745ab1da4cbeaaead81ab22e777cfd0887288",
+    "protocolVersionsImplAddress": "0x37e15e4d6dffa9e5e320ee1ec036922e563cb76c"
+  },
+  "opChainDeployment": {
+    "proxyAdminAddress": "0xf706d86935b05a9df1fb0084b93e42a660d13fc8",
+    "addressManagerAddress": "0xdbdfdc25a6222ce7f03aa257613885ab4b663249",
+    "l1ERC721BridgeProxyAddress": "0x06b43e395c58002fef4911f76c2214530b3af4d8",
+    "systemConfigProxyAddress": "0x6de2286a0a09cf65db1784bd3b611d84c8432da8",
+    "optimismMintableERC20FactoryProxyAddress": "0x7d85ced857063947c4b32cd03755a7d6a8a576c2",
+    "l1StandardBridgeProxyAddress": "0xfa5028a64356fb5fb5576a0273fec6aec3a8a982",
+    "l1CrossDomainMessengerProxyAddress": "0x7f58c13cb9a6405d8003302a55a538b33d36644f",
+    "optimismPortalProxyAddress": "0x99a198a8e26206743567652c9578b4ffcf2a2a04",
+    "ethLockboxProxyAddress": "0x0000000000000000000000000000000000000000",
+    "disputeGameFactoryProxyAddress": "0x26239d5ec55a9c4a3165fb501ea968f19b6a53d8",
+    "anchorStateRegistryProxyAddress": "0xd4099885c6bc92bfd079d8bd6791a7443abcf774",
+    "anchorStateRegistryImplAddress": "0x0000000000000000000000000000000000000000",
+    "faultDisputeGameAddress": "0x0000000000000000000000000000000000000000",
+    "permissionedDisputeGameAddress": "0x10390ea632c04507995feee9f56ce66a89823fed",
+    "delayedWETHPermissionedGameProxyAddress": "0xe859df1d45c6027b20ff5af7abcf26f4432b80b6",
+    "dataAvailabilityChallengeProxyAddress": "0x0000000000000000000000000000000000000000",
+    "dataAvailabilityChallengeImplAddress": "0x0000000000000000000000000000000000000000"
+  },
+  "implementationsDeployment": {
+    "opcmAddress": "0x3891804b955b709fd44f42f1b36cf6c2987d311b",
+    "delayedWETHImplAddress": "0x5e40b9231b86984b5150507046e354dbfbed3d9e",
+    "optimismPortalImplAddress": "0xb443da3e07052204a02d630a8933dac05a0d6fb4",
+    "ethLockboxImplAddress": "0x0000000000000000000000000000000000000000",
+    "preimageOracleSingletonAddress": "0x1fb8cdfc6831fc866ed9c51af8817da5c287add3",
+    "mipsSingletonAddress": "0xf027f4a985560fb13324e943edf55ad6f1d15dc1",
+    "systemConfigImplAddress": "0x340f923e5c7cbb2171146f64169ec9d5a9ffe647",
+    "l1CrossDomainMessengerImplAddress": "0x5d5a095665886119693f0b41d8dfee78da033e8b",
+    "l1ERC721BridgeImplAddress": "0x7ae1d3bd877a4c5ca257404ce26be93a02c98013",
+    "l1StandardBridgeImplAddress": "0x0b09ba359a106c9ea3b181cbc5f394570c7d2a7a",
+    "optimismMintableERC20FactoryImplAddress": "0x5493f4677a186f64805fe7317d6993ba4863988f",
+    "disputeGameFactoryImplAddress": "0x4bba758f006ef09402ef31724203f316ab74e4a0"
+  }
+}
+
